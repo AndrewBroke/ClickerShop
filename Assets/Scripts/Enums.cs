@@ -9,4 +9,10 @@ public class Enums : MonoBehaviour
         Diamond = 0,
         Item = 1
     }
+
+    public enum CurrencyType
+    {
+        Coin = 0,
+        Diamond = 1
+    }
 }

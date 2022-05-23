@@ -6,15 +6,16 @@ using static Enums;
 
 public class Item : MonoBehaviour
 {
-    [SerializeField] private ItemType _type;
+    [SerializeField] private ItemType _itemType;
     [SerializeField] private UIResources _uIResources;
+    [SerializeField] private CurrencyType _currencyType;
      
     private int _cost;
     private int _count;
 
     public ItemType GetItemType()
     {
-        return _type;
+        return _itemType;
     }
 
     private void Start()
@@ -26,12 +27,12 @@ public class Item : MonoBehaviour
 
     public void Click()
     {
-        switch (_type)
+        switch (_itemType)
         {
             case ItemType.Diamond:
-                if (_uIResources.RemoveCoins(_cost))
+                if (_uIResources.ChangeCurrency(CurrencyType.Coin, -_cost))
                 {
-                    _uIResources.AddDiamonds(_count);
+                    _uIResources.ChangeCurrency(CurrencyType.Diamond, _count);
                 }
                 break;
             case ItemType.Item:

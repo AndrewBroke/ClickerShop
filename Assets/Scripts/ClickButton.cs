@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Enums;
 
 public class ClickButton : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class ClickButton : MonoBehaviour
 
     public void Click()
     {
-        _uIResources.AddCoins(_countAdd);
+        _uIResources.ChangeCurrency(CurrencyType.Coin, _countAdd);
         Instantiate(_particleCoin, transform.position, Quaternion.identity);
     }
 

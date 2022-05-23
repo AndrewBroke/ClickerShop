@@ -2,39 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Enums;
 
 public class UIResources : MonoBehaviour
 {
     [SerializeField] private Text _diamondsCount;
     [SerializeField] private Text _coinsCount;
 
-    public void AddCoins(int n)
+    public bool ChangeCurrency(CurrencyType currencyType, int value)
     {
-        int coinsCountInt = int.Parse(_coinsCount.text);
-        coinsCountInt += n;
-        _coinsCount.text = coinsCountInt.ToString();
-    }
-
-    public bool RemoveCoins(int n)
-    {
-        int coinsCountInt = int.Parse(_coinsCount.text);
-        coinsCountInt -= n;
-        if (coinsCountInt < 0)
+        switch (currencyType)
         {
-            return false;
+            case CurrencyType.Coin:
+                int coinsCountInt = int.Parse(_coinsCount.text);
+                coinsCountInt += value;
+                if (coinsCountInt < 0)
+                {
+                    return false;
+                }
+                _coinsCount.text = coinsCountInt.ToString();
+                return true;
+            case CurrencyType.Diamond:
+                int diamondsCountInt = int.Parse(_diamondsCount.text);
+                diamondsCountInt += value;
+                if (diamondsCountInt < 0)
+                {
+                    return false;
+                }
+                _diamondsCount.text = diamondsCountInt.ToString();
+                return true;
+            default:
+                return true;
         }
-
-        
-
-        _coinsCount.text = coinsCountInt.ToString();
-
-        return true;
-    }
-
-    public void AddDiamonds(int n)
-    {
-        int diamondsCountInt = int.Parse(_diamondsCount.text);
-        diamondsCountInt += n;
-        _diamondsCount.text = diamondsCountInt.ToString();
     }
 }
