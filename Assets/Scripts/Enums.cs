@@ -6,8 +6,11 @@ public class Enums : MonoBehaviour
 {
     public enum ItemType
     {
+        None = -1,
         Diamond = 0,
-        Item = 1
+        Sword = 1,
+        Book = 2,
+        Potion = 3
     }
 
     public enum CurrencyType

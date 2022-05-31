@@ -12,6 +12,8 @@ public class Item : MonoBehaviour
      
     private int _cost;
     private int _count;
+    private Inventory _inventory;
+    private Sprite _productImage;
 
     public ItemType GetItemType()
     {
@@ -20,7 +22,8 @@ public class Item : MonoBehaviour
 
     private void Start()
     {
-        
+        _inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
+        _productImage = GameObject.Find(gameObject.name + "/ProductImage").gameObject.GetComponent<Image>().sprite;
         _cost = int.Parse(GameObject.Find(gameObject.name + "/Cost/CostCount").gameObject.GetComponent<Text>().text);
         _count = int.Parse(GameObject.Find(gameObject.name + "/ProductCount").gameObject.GetComponent<Text>().text);
     }
@@ -35,12 +38,13 @@ public class Item : MonoBehaviour
                     _uIResources.ChangeCurrency(CurrencyType.Diamond, _count);
                 }
                 break;
-            case ItemType.Item:
-
-                break;
-
             default:
+                if (_uIResources.ChangeCurrency(_currencyType, -_cost))
+                {
+                    _inventory.AddItem(_itemType, _count, _productImage);
 
+                    Debug.Log("Куплен " + gameObject.name);
+                }
                 break;
         }
 
